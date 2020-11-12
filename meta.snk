@@ -1,0 +1,15 @@
+sites = ['BGI', 'CNL', 'MAY', 'BGI', 'AGR', 'NVS']
+rule all:
+    output:
+        meta='output/seqc_meta.tsv',
+        summary='output/seqc_summary.tsv',
+    input:
+        expand('raw/{site}_samples.tsv', site=sites)
+    threads: 1
+    shell:
+        '''
+        python process_metadata.py \
+            --input {input} \
+            --output {output.meta} \
+            --summary {output.summary}
+        '''
