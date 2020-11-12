@@ -1,6 +1,6 @@
 # SEQC Data
 
-Download, aggregate and SEQC Data better names.
+Download, aggregate and give SEQC samples better names.
 
 Much thanks to SRA-Explorer written by Phil Ewels, from which "raw" metadata TSV files are downloaded.
 
