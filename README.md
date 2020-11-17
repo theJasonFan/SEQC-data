@@ -34,3 +34,4 @@ Life Technologies SOLiD 5500 data were provided by 4 sites: (1) the University o
 
 ## Notes:
 - As of 11/09/20, MAY samples are not searchable by `All Fields` in SRA... and
+- NYG sample lanes start with L02 instead of L01, `process_metadata.py` reindexes the lanes to start at 1. ie L02 -> lane==1 etc.

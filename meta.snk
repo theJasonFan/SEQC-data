@@ -1,4 +1,4 @@
-sites = ['BGI', 'CNL', 'MAY', 'BGI', 'AGR', 'NVS']
+sites = ['BGI', 'CNL', 'MAY', 'NYG', 'AGR', 'NVS']
 rule all:
     output:
         meta='output/seqc_meta.tsv',

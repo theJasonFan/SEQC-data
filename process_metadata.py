@@ -68,6 +68,19 @@ def extract_rows_info(one, two):
 
     return meta
 
+def clean_reindex_lanes(df):
+    # group by site sample flowcell ID, replicate
+    # reindex lanes for each site, flowcell, sample, replicate to 1...max_n_lanes
+
+    df_gb = df.groupby(['Site', 'Sample', 'Flowcell_ID', 'Replicate'])['Lane'].unique()
+
+    for (site, sample, fc_id, rep), lane_in_ids in df_gb.iteritems():
+        mapping = dict((l, i+1) for (i, l) in enumerate(lane_in_ids))
+
+        mod_df_flags = (df['Site'] == site) & (df['Sample'] == sample) & (df['Flowcell_ID'] == fc_id) & (df['Replicate'] == rep)
+
+        df.loc[mod_df_flags, 'Lane'] = df[mod_df_flags]['Lane'].map(mapping)
+    return df
 
 def summarize(df):
 
@@ -99,6 +112,8 @@ def main():
 
     df = df[cols_ordered]
     df = df.sort_values(cols_ordered)
+
+    df = clean_reindex_lanes(df)
     df.to_csv(args.output, index=False, sep='\t')
     
     summary = summarize(df)
